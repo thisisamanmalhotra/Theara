@@ -1,12 +1,17 @@
+import java.io.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+
 class Window
 {
     JFrame f;
-    JTextArea cli;
-    JTextArea face;
-    JTextArea chat;
+    JLabel cli;
+    JLabel face;
+    JLabel chat;
     JScrollPane scroll;
+
+    KeyListener k;
 
     Window()
     {
@@ -21,44 +26,68 @@ class Window
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    void createChat()
-    {
-        chat = new JTextArea();
-        chat.setBounds(10,10,317,680);
-        Font f1 = chat.getFont();
-        Font f2 = new Font(f1.getFontName(), f1.getStyle(), f1.getSize()+5);
-        chat.setFont(f2);
-        chat.setLineWrap(true);
-        Color c = new Color(0,0,0);
-        chat.setBackground(c);
-        c = new Color(0,0,255);
-        chat.setForeground(c);
-        f.add(chat);
-    }
-
     void createCli()
     {
-        cli = new JTextArea();
+        cli = new JLabel("kjsgvjeklbgvjle");
         cli.setBounds(337,522,953,168);
         cli.setFont(new Font(Font.MONOSPACED, cli.getFont().getStyle(), 17));
+        cli.setOpaque(true);
         cli.setBackground(new Color(0,0,0));
         cli.setForeground(new Color(0,200,0));
-        cli.setLineWrap(true);
+        //cli.setLineWrap(true);
+
         scroll = new JScrollPane (cli);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        k = new KeyListener()
+        {
+            @Override
+            public void keyTyped(KeyEvent key)
+            {
+                System.out.println("Key typed code=" + key.getKeyCode() + ", char=" + key.getKeyChar());
+            }
+
+            @Override
+            public void keyPressed(KeyEvent key)
+            {
+                System.out.println("Key pressed code=" + key.getKeyCode() + ", char=" + key.getKeyChar());
+            }
+
+            @Override
+            public void keyReleased(KeyEvent key)
+            {
+                System.out.println("Key released code=" + key.getKeyCode() + ", char=" + key.getKeyChar());
+            }
+        };
+
+
+        f.addKeyListener(k);
         f.add(cli);
         f.add(scroll);
     }
 
+    void createChat()
+    {
+        chat = new JLabel("jlvkhrkl");
+        chat.setBounds(10,10,317,680);
+        Font f1 = chat.getFont();
+        Font f2 = new Font(f1.getFontName(), f1.getStyle(), f1.getSize()+5);
+        chat.setFont(f2);
+        chat.setOpaque(true);
+        chat.setBackground(new Color(0,0,0));
+        chat.setForeground(new Color(0,0,255));
+        f.add(chat);
+    }
+
     void createFace()
     {
-        face = new JTextArea();
+        face = new JLabel();
         face.setBounds(337,10,953,502);
         Font f1 = face.getFont();
         Font f2 = new Font(f1.getFontName(), f1.getStyle(), f1.getSize()+5);
         face.setFont(f2);
-        Color c = new Color(0,0,0);
-        face.setBackground(c);
+        face.setOpaque(true);
+        face.setBackground(new Color(0,0,0));
         f.add(face);
     }
 }
